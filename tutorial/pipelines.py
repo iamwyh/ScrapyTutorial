@@ -9,9 +9,11 @@ class TextPipeline(object):
     def process_item(self, item, spider):
         if item['text']:
             if len(item['text']) > self.limit:
+                #rstrip()删除末尾字符，默认删除空格
                 item['text'] = item['text'][0:self.limit].rstrip() + '...'
             return item
         else:
+            #process_item可以return item或者return DropItem
             return DropItem('Missing Text')
 
 
