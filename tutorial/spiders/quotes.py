@@ -19,6 +19,7 @@ class QuotesSpider(scrapy.Spider):
             yield item
 
         next = response.css('.pager .next a::attr(href)').extract_first()
+        #拼接url的绝对路径，也可以这样写：url = response.urljoin(response.url, next)
         url = response.urljoin(next)
         yield scrapy.Request(url=url, callback=self.parse)
 
